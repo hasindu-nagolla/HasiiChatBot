@@ -5,10 +5,10 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, Message
 from pyrogram.enums import ChatType
 
-from ANNIECHATBOT import app
-from ANNIECHATBOT.database.chats import add_served_chat
-from ANNIECHATBOT.database.users import add_served_user
-from ANNIECHATBOT.modules.helpers import (
+from HasiiBot import app
+from HasiiBot.database.chats import add_served_chat
+from HasiiBot.database.users import add_served_user
+from HasiiBot.modules.helpers import (
     CLOSE_BTN,
     DEV_OP,
     HELP_BTN,

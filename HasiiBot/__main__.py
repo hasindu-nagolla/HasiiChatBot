@@ -3,8 +3,8 @@ import importlib
 
 from pyrogram import idle
 
-from ANNIECHATBOT import LOGGER, app
-from ANNIECHATBOT.modules import ALL_MODULES
+from HasiiBot import LOGGER, app
+from HasiiBot.modules import ALL_MODULES
 
 
 async def jarvis_boot():
@@ -15,7 +15,7 @@ async def jarvis_boot():
         quit(1)
 
     for all_module in ALL_MODULES:
-        importlib.import_module("ANNIECHATBOT.modules." + all_module)
+        importlib.import_module("HasiiBot.modules." + all_module)
 
     LOGGER.info(f"@{app.username} Started.")
     await idle()

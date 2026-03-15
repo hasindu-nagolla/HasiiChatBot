@@ -10,7 +10,7 @@ from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-from ANNIECHATBOT import OWNER, app
+from HasiiBot import OWNER, app
 
 
 async def aexec(code, client, message):

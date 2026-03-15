@@ -1,5 +1,5 @@
 from config import OWNER_USERNAME, SUPPORT_GROUP
-from ANNIECHATBOT import app
+from HasiiBot import app
 
 START = f"""
 **๏ ʜᴇʏ, ɪ ᴀᴍ [{app.name}](t.me/{app.username})**
@@ -36,9 +36,9 @@ CHATBOT_READ = f"""
 <b> ©️ @{OWNER_USERNAME} </b>
 """
 
-SOURCE_READ = f"**ʜᴇʏ, ᴛʜᴇ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ᴏғ [{app.name}](https://t.me/{app.username}) ɪs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ.**\n**ᴘʟᴇᴀsᴇ ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ & ɢɪᴠᴇ ᴛʜᴇ sᴛᴀʀ ✯**\n**──────────────────**\n**ʜᴇʀᴇ ɪs ᴛʜᴇ [sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ](https://github.com/doraemon890/ANNIE-X-CHATBOT)**\n**──────────────────**\n**ɪғ ʏᴏᴜ ғᴀᴄᴇ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ ᴛʜᴇɴ ᴄᴏɴᴛᴀᴄᴛ ᴀᴛ [sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛ](https://t.me/{SUPPORT_GROUP}).\n<b> ©️ @{OWNER_USERNAME} </b>"
+SOURCE_READ = f"**ʜᴇʏ, ᴛʜᴇ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ᴏғ [{app.name}](https://t.me/{app.username}) ᴡɪʟʟ ʙᴇ ᴀᴠᴀɪʟᴀʙʟᴇ sᴏᴏɴ.**\\n<b> ©️ @{OWNER_USERNAME} </b>"
 
-ADMIN_READ = f"[JARVIS_SUPPORT](https://t.me/JARVIS_V_SUPPORT)"
+ADMIN_READ = f"[SUPPORT](https://t.me/{OWNER_USERNAME})"
 
 ABOUT_READ = f"""
 **➻ [{app.name}](https://t.me/{app.username}) ɪs ᴀɴ ᴀɪ ʙᴀsᴇᴅ ᴄʜᴀᴛ-ʙᴏᴛ.**

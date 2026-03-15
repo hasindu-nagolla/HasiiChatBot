@@ -3,9 +3,9 @@ from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
 
 from config import OWNER_USERNAME, SUPPORT_GROUP
 
-from ANNIECHATBOT import app
-from ANNIECHATBOT.database import annie
-from ANNIECHATBOT.modules.helpers import (
+from HasiiBot import app
+from HasiiBot.database import annie
+from HasiiBot.modules.helpers import (
     ABOUT_BTN,
     ABOUT_READ,
     ADMIN_READ,

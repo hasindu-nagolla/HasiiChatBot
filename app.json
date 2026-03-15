@@ -16,7 +16,7 @@
       "url": "heroku/python"
     }
   ],
-  "repository": "https://github.com/doraemon890/ANNIE-X-CHATBOT",
+  "repository": "",
   "env": {
     "API_ID": {
       "description": "Your Telegram API ID",
@@ -41,7 +41,7 @@
     "OWNER_USERNAME": {
       "description": "Username of the bot owner",
       "required": true,
-      "value": "JARVIS_V2"
+      "value": "Hasindu_Lakshan"
     },
     "GPT_API": {
       "description": "Your GPT API Key from OpenAI.",
@@ -51,12 +51,12 @@
     "SUPPORT_GROUP": {
       "description": "Name of the support group",
       "required": true,
-      "value": "Dora_Hub"
+      "value": ""
     },
     "UPDATE_CHANNEL": {
       "description": "Name of the update channel",
       "required": true,
-      "value": "JARVIS_V_SUPPORT"
+      "value": ""
     }
   }
 }

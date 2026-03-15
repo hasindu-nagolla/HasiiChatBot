@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.enums import ParseMode
 
-from ANNIECHATBOT import app
+from HasiiBot import app
 
 
 @app.on_cmd("id")

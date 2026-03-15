@@ -1,8 +1,8 @@
 from pyrogram.types import InlineKeyboardButton
 
 from config import SUPPORT_GROUP, UPDATE_CHANNEL
-from ANNIECHATBOT import OWNER
-from ANNIECHATBOT import app
+from HasiiBot import OWNER
+from HasiiBot import app
 
 DEV_OP = [
     [

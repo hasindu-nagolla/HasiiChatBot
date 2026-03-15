@@ -4,7 +4,7 @@ import mimetypes
 import os
 from pyrogram import filters, types as t
 from lexica import AsyncClient
-from ANNIECHATBOT import app
+from HasiiBot import app
 from lexica.constants import languageModels
 
 

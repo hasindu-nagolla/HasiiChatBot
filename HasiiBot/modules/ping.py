@@ -8,10 +8,10 @@ from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardMarkup, Message
 
 from config import OWNER_USERNAME
-from ANNIECHATBOT import app
-from ANNIECHATBOT.database.chats import add_served_chat
-from ANNIECHATBOT.database.users import add_served_user
-from ANNIECHATBOT.modules.helpers import PNG_BTN
+from HasiiBot import app
+from HasiiBot.database.chats import add_served_chat
+from HasiiBot.database.users import add_served_user
+from HasiiBot.modules.helpers import PNG_BTN
 
 
 #----------------IMG-------------#
@@ -64,7 +64,7 @@ async def ping(_, message: Message):
 
     ms = (datetime.now() - start).microseconds / 1000
     await loda.edit_text(
-        text=f"нey вαву!!\n{app.name} ιѕ alιve 🥀 αnd worĸιng ғιne wιтн a pιng oғ\n➥ `{ms}` ms\n\n<b>мαdє ву [𝙹ᴀʀᴠɪs](https://t.me/{OWNER_USERNAME}) </b>",
+        text=f"нey вαву!!\\n{app.name} ιѕ alιve 🥀 αnd worĸιng ғιne wιтн a pιng oғ\\n➥ `{ms}` ms\\n\\n<b>мαdє ву <a href=\"https://t.me/Hasindu_Lakshan\">@Hasindu_Lakshan</a> </b>",
         reply_markup=InlineKeyboardMarkup(PNG_BTN),
     )
     if message.chat.type == ChatType.PRIVATE:

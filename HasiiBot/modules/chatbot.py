@@ -7,8 +7,8 @@ from pyrogram.enums import ChatAction
 from pyrogram.types import InlineKeyboardMarkup, Message
 
 from config import MONGO_URL
-from ANNIECHATBOT import app
-from ANNIECHATBOT.modules.helpers import CHATBOT_ON, is_admins
+from HasiiBot import app
+from HasiiBot.modules.helpers import CHATBOT_ON, is_admins
 
 
 @app.on_cmd("chatbot", group_only=True)

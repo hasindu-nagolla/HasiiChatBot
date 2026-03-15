@@ -1,4 +1,4 @@
-from ANNIECHATBOT import db
+from HasiiBot import db
 
 chatsdb = db.chatsdb
 
