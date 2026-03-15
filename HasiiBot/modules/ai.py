@@ -81,8 +81,11 @@ async def chat_bots(_, m: t.Message):
         return await ask_about_image(_, m, [media], prompt)
     if prompt is None:
         return await m.reply_text("Hello, how can I assist you today?")
+    sys_prompt = "You are Hasii, a very friendly, funny, and helpful AI assistant for Telegram. IMPORTANT: You must always reply in everyday spoken Sinhala (Singlish or Sinhala Unicode). Be casual, talk like a close friend, and use some emojis. The user's query is: "
+    full_prompt = sys_prompt + prompt
+
     model = m.command[0].lower()
-    output = await chat_completion(prompt, model)
+    output = await chat_completion(full_prompt, model)
     if model == "bard":
         output, images = output
         if len(images) == 0:

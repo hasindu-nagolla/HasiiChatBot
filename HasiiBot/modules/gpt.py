@@ -17,7 +17,9 @@ async def chat_gpt(bot, message):
             await message.reply_text(f"**Hello {name}, How can I help you today?**")
         else:
             query = message.text.split(' ', 1)[1]
-            response = api.gemini(query)["results"]
+            sys_prompt = "You are Hasii, a very friendly, funny, and helpful AI assistant for Telegram. IMPORTANT: You must always reply in everyday spoken Sinhala (Singlish or Sinhala Unicode). Be casual, talk like a close friend, and use some emojis. The user's message is: "
+            full_query = sys_prompt + query
+            response = api.gemini(full_query)["results"]
             await message.reply_text(f"{response}", parse_mode=ParseMode.MARKDOWN)
     except Exception as e:
         await message.reply_text(f"**Error: {e}**")
