@@ -1,67 +1,86 @@
-import asyncio
-import base64
-import mimetypes
 import os
 from pyrogram import filters, types as t
-from lexica import AsyncClient
+from pyrogram.enums import ChatAction
 from HasiiBot import app
-from lexica.constants import languageModels
+
+import g4f
 
 
-async def chat_completion(prompt, model) -> tuple | str:
+SYSTEM_PROMPT = (
+    "You are Hasii, a very friendly, funny, and helpful AI assistant for Telegram. "
+    "IMPORTANT: You must always reply in everyday spoken Sinhala (Singlish or Sinhala Unicode). "
+    "Be casual, talk like a close friend, and use some emojis. "
+    "Keep your replies concise and engaging."
+)
+
+
+async def chat_completion(prompt: str) -> str:
+    """Send a prompt to g4f and return the AI response."""
     try:
-        model_info = getattr(languageModels, model)
-        client = AsyncClient()
-        output = await client.ChatCompletion(prompt, model_info)
-        if model == "bard":
-            return output['content'], output['images']
-        return output['content']
+        response = await g4f.ChatCompletion.create_async(
+            model=g4f.models.default,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        return response
     except Exception as e:
-        raise Exception(f"API error: {e}")
+        raise Exception(f"AI Error: {e}")
 
 
-async def gemini_vision(prompt, model, images) -> tuple | str:
-    image_info = []
-    for image in images:
-        with open(image, "rb") as image_file:
-            data = base64.b64encode(image_file.read()).decode("utf-8")
-            mime_type, _ = mimetypes.guess_type(image)
-            image_info.append({
-                "data": data,
-                "mime_type": mime_type
-            })
-        os.remove(image)
-    payload = {
-        "images": image_info
-    }
-    model_info = getattr(languageModels, model)
-    client = AsyncClient()
-    output = await client.ChatCompletion(prompt, model_info, json=payload)
-    return output['content']['parts'][0]['text']
+async def vision_completion(prompt: str, image_path: str) -> str:
+    """Send image + prompt to g4f vision model."""
+    try:
+        from g4f.Provider import You
+
+        with open(image_path, "rb") as img_file:
+            image_data = img_file.read()
+
+        response = await g4f.ChatCompletion.create_async(
+            model=g4f.models.default,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt or "What's in this image?"},
+            ],
+        )
+        # Clean up downloaded image
+        if os.path.exists(image_path):
+            os.remove(image_path)
+        return response
+    except Exception as e:
+        if os.path.exists(image_path):
+            os.remove(image_path)
+        raise Exception(f"Vision AI Error: {e}")
 
 
 def get_media(message):
-    """Extract Media"""
+    """Extract Media from message or reply."""
     media = None
     if message.media:
         if message.photo:
             media = message.photo
-        elif message.document and message.document.mime_type in ['image/png', 'image/jpg', 'image/jpeg'] \
-                and message.document.file_size < 5242880:
+        elif (
+            message.document
+            and message.document.mime_type in ["image/png", "image/jpg", "image/jpeg"]
+            and message.document.file_size < 5242880
+        ):
             media = message.document
     elif message.reply_to_message and message.reply_to_message.media:
         if message.reply_to_message.photo:
             media = message.reply_to_message.photo
-        elif message.reply_to_message.document and message.reply_to_message.document.mime_type in ['image/png',
-                                                                                                      'image/jpg',
-                                                                                                      'image/jpeg'] \
-                and message.reply_to_message.document.file_size < 5242880:
+        elif (
+            message.reply_to_message.document
+            and message.reply_to_message.document.mime_type
+            in ["image/png", "image/jpg", "image/jpeg"]
+            and message.reply_to_message.document.file_size < 5242880
+        ):
             media = message.reply_to_message.document
     return media
 
 
 def get_text(message):
-    """Extract Text From Commands"""
+    """Extract text from commands."""
     if message.text is None:
         return None
     if " " in message.text:
@@ -69,42 +88,39 @@ def get_text(message):
             return message.text.split(None, 1)[1]
         except IndexError:
             return None
-    else:
-        return None
+    return None
 
 
-@app.on_message(filters.command(["bard", "gpt", "llama", "mistral", "palm", "gemini"]))
+@app.on_message(filters.command(["ask", "ai", "gpt", "gemini"]))
 async def chat_bots(_, m: t.Message):
     prompt = get_text(m)
     media = get_media(m)
+
     if media is not None:
-        return await ask_about_image(_, m, [media], prompt)
+        return await ask_about_image(_, m, media, prompt)
+
     if prompt is None:
-        return await m.reply_text("Hello, how can I assist you today?")
-    sys_prompt = "You are Hasii, a very friendly, funny, and helpful AI assistant for Telegram. IMPORTANT: You must always reply in everyday spoken Sinhala (Singlish or Sinhala Unicode). Be casual, talk like a close friend, and use some emojis. The user's query is: "
-    full_prompt = sys_prompt + prompt
-
-    model = m.command[0].lower()
-    output = await chat_completion(full_prompt, model)
-    if model == "bard":
-        output, images = output
-        if len(images) == 0:
-            return await m.reply_text(output)
-        media = [t.InputMediaPhoto(i) for i in images]
-        media[0] = t.InputMediaPhoto(images[0], caption=output)
-        await _.send_media_group(
-            m.chat.id,
-            media,
-            reply_to_message_id=m.message_id
+        return await m.reply_text(
+            "**ආයුබෝවන්! 🙏 මට ඕනෙ මොනවද කියන්න.**\n"
+            "**උදාහරණ:** `/ask ලංකාවේ අගනුවර මොකක්ද?`"
         )
-    else:
-        await m.reply_text(output['parts'][0]['text'] if model == "gemini" else output)
+
+    try:
+        await _.send_chat_action(m.chat.id, ChatAction.TYPING)
+        output = await chat_completion(prompt)
+        await m.reply_text(output)
+    except Exception as e:
+        await m.reply_text(f"⚠️ **දෝෂයක් ඇති වුණා:** `{e}`")
 
 
-async def ask_about_image(_, m: t.Message, media_files: list, prompt: str):
-    images = []
-    for media in media_files:
-        image = await _.download_media(media.file_id, file_name=f'./downloads/{m.from_user.id}_ask.jpg')
-        images.append(image)
-    output = await gemini_vision(prompt if prompt else "What's this?", "geminiVision", images)
-    await m.reply_text(output)
+async def ask_about_image(_, m: t.Message, media, prompt: str):
+    try:
+        await _.send_chat_action(m.chat.id, ChatAction.TYPING)
+        image = await _.download_media(
+            media.file_id,
+            file_name=f"./downloads/{m.from_user.id}_ask.jpg",
+        )
+        output = await vision_completion(prompt, image)
+        await m.reply_text(output)
+    except Exception as e:
+        await m.reply_text(f"⚠️ **දෝෂයක් ඇති වුණා:** `{e}`")
