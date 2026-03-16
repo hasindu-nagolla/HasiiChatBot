@@ -42,7 +42,7 @@ STICKER = [
 ]
 
 # Random emojis
-EMOJIOS = ["💣", "💥", "🪄", "🧨", "⚡", "🤡", "👻", "🎃", "🎩", "🕊"]
+EMOJIOS = ["💣", "💥", "🧨", "⚡", "🤡", "👻", "🎃", "🎩", "🕊"]
 
 
 # Command handler for /start and /aistart
@@ -52,11 +52,11 @@ async def start_command_handler(_, m: Message):
         # Display loading messages
         accha = await m.reply_text(text=random.choice(EMOJIOS))
         await asyncio.sleep(1.3)
-        await accha.edit("🏓ᴀɴɴɪᴇ..ᴍᴇᴇɴʏ..ᴍɪɴʏ..ᴍᴏᴇ✨")
+        await accha.edit("🏓ʜᴀsɪɪ..ᴍᴇᴇɴʏ..ᴍɪɴʏ..ᴍᴏᴇ✨")
         await asyncio.sleep(0.2)
-        await accha.edit("__ᴀɴɴɪᴇ..ᴍᴇᴇɴʏ ꨄ sтαятιиg.....__")
+        await accha.edit("__ʜᴀsɪɪ..ᴍᴇᴇɴʏ ꨄ sтαятιиg.....__")
         await asyncio.sleep(0.2)
-        await accha.edit("__ꪖꪀꪀ𝓲ꫀ ꨄ︎ sтαятιиg..__")
+        await accha.edit("__ꫝꪖᦓ𝓲𝓲 ꨄ︎ sтαятιиg..__")
         await asyncio.sleep(0.2)
         await accha.delete()
 
