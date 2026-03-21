@@ -52,10 +52,10 @@ async def chatbot_text(client: Client, message: Message):
     chatai = chatdb["Word"]["WordDb"]
 
     if not message.reply_to_message:
-        anniedb = MongoClient(MONGO_URL)
-        annie  = anniedb["AnnieDb"]["Annie"]
-        is_annie  = annie.find_one({"chat_id": message.chat.id})
-        if not is_annie:
+        hasiidb = MongoClient(MONGO_URL)
+        hasii = hasiidb["HasiiDb"]["Hasii"]
+        is_hasii = hasii.find_one({"chat_id": message.chat.id})
+        if not is_hasii:
             await safe_send(client.send_chat_action, message.chat.id, ChatAction.TYPING)
             K = []
             is_chat = chatai.find({"word": message.text})
@@ -75,11 +75,11 @@ async def chatbot_text(client: Client, message: Message):
         reply = message.reply_to_message
         if not reply.from_user:
             return
-        anniedb = MongoClient(MONGO_URL)
-        annie  = anniedb["AnnieDb"]["Annie"]
-        is_annie  = annie.find_one({"chat_id": message.chat.id})
+        hasiidb = MongoClient(MONGO_URL)
+        hasii = hasiidb["HasiiDb"]["Hasii"]
+        is_hasii = hasii.find_one({"chat_id": message.chat.id})
         if reply.from_user.id == client.id:
-            if not is_annie:
+            if not is_hasii:
                 await safe_send(client.send_chat_action, message.chat.id, ChatAction.TYPING)
                 K = []
                 is_chat = chatai.find({"word": message.text})
@@ -144,10 +144,10 @@ async def chatbot_sticker(client: Client, message: Message):
     chatai = chatdb["Word"]["WordDb"]
 
     if not message.reply_to_message:
-        anniedb = MongoClient(MONGO_URL)
-        annie  = anniedb["AnnieDb"]["Annie"]
-        is_annie  = annie.find_one({"chat_id": message.chat.id})
-        if not is_annie:
+        hasiidb = MongoClient(MONGO_URL)
+        hasii = hasiidb["HasiiDb"]["Hasii"]
+        is_hasii = hasii.find_one({"chat_id": message.chat.id})
+        if not is_hasii:
             await safe_send(client.send_chat_action, message.chat.id, ChatAction.TYPING)
             K = []
             is_chat = chatai.find({"word": message.sticker.file_unique_id})
@@ -167,11 +167,11 @@ async def chatbot_sticker(client: Client, message: Message):
         reply = message.reply_to_message
         if not reply.from_user:
             return
-        anniedb = MongoClient(MONGO_URL)
-        annie  = anniedb["AnnieDb"]["Annie"]
-        is_annie  = annie.find_one({"chat_id": message.chat.id})
+        hasiidb = MongoClient(MONGO_URL)
+        hasii = hasiidb["HasiiDb"]["Hasii"]
+        is_hasii = hasii.find_one({"chat_id": message.chat.id})
         if reply.from_user.id == client.id:
-            if not is_annie:
+            if not is_hasii:
                 await safe_send(client.send_chat_action, message.chat.id, ChatAction.TYPING)
                 K = []
                 is_chat = chatai.find({"word": message.text})

@@ -4,7 +4,7 @@ from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
 from config import OWNER_USERNAME, SUPPORT_GROUP
 
 from HasiiBot import app
-from HasiiBot.database import annie
+from HasiiBot.database import hasii
 from HasiiBot.modules.helpers import (
     ABOUT_BTN,
     ABOUT_READ,
@@ -84,11 +84,11 @@ async def cb_handler(_, query: CallbackQuery):
                 show_alert=True,
             )
         else:
-            is_annie = annie.find_one({"chat_id": query.message.chat.id})
-            if not is_annie:
+            is_hasii = hasii.find_one({"chat_id": query.message.chat.id})
+            if not is_hasii:
                 await query.edit_message_text(f"**ᴄʜᴀᴛ-ʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ.**")
-            if is_annie:
-                annie.delete_one({"chat_id": query.message.chat.id})
+            if is_hasii:
+                hasii.delete_one({"chat_id": query.message.chat.id})
                 await query.edit_message_text(
                     f"**ᴄʜᴀᴛ-ʙᴏᴛ ᴇɴᴀʙʟᴇᴅ ʙʏ** {query.from_user.mention}."
                 )
@@ -102,11 +102,11 @@ async def cb_handler(_, query: CallbackQuery):
             )
             return
         else:
-            is_annie = annie.find_one({"chat_id": query.message.chat.id})
-            if not is_annie:
-                annie.insert_one({"chat_id": query.message.chat.id})
+            is_hasii = hasii.find_one({"chat_id": query.message.chat.id})
+            if not is_hasii:
+                hasii.insert_one({"chat_id": query.message.chat.id})
                 await query.edit_message_text(
                     f"**ᴄʜᴀᴛ-ʙᴏᴛ ᴅɪsᴀʙʟᴇᴅ ʙʏ** {query.from_user.mention}."
                 )
-            if is_annie:
+            if is_hasii:
                 await query.edit_message_text("**ᴄʜᴀᴛ-ʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ.**")

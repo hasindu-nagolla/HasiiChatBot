@@ -2,8 +2,8 @@ from pymongo import MongoClient
 
 import config
 
-anniedb = MongoClient(config.MONGO_URL)
-annie = anniedb["AnnieDb"]["Annie"]
+hasiidb = MongoClient(config.MONGO_URL)
+hasii = hasiidb["HasiiDb"]["Hasii"]
 
 
 from .chats import *
