@@ -1,7 +1,7 @@
 # HasiiChatBot
 
 <p align="center">
-   <img src="https://files.catbox.moe/bti5oz.png" alt="HasiiBot Banner" width="420" />
+   <img src="https://files.catbox.moe/bti5oz.png" alt="HasiiChatBot Banner" width="420" />
 </p>
 
 > AI-first Telegram assistant with MongoDB memory, Pyrogram power, and VPS-only deployment.
@@ -18,7 +18,7 @@
 - [Support](#support)
 
 ## Overview
-HasiiBot is an intelligent conversational Telegram bot that runs best on a self-managed VPS. It uses Pyrogram + MongoDB to remember chats, respects Telegram FloodWait limits, and provides a smooth experience in both groups and private chats.
+HasiiChatBot is an intelligent conversational Telegram bot that runs best on a self-managed VPS. It uses Pyrogram + MongoDB to remember chats, respects Telegram FloodWait limits, and provides a smooth experience in both groups and private chats.
 
 ## Features
 - AI-powered replies with GPT-backed fallback pipeline
@@ -88,7 +88,7 @@ The `start` script handles screen/tmux friendly launches on a VPS. Customize it 
 ## VPS Deployment Checklist
 1. Update and secure the VPS (`apt update && apt upgrade` + firewall).
 2. Install Python build tools: `sudo apt install python3-pip python3-venv -y`.
-3. Clone the repo to `/opt/hasiibot` (or your preferred path).
+3. Clone the repo to `/opt/hasiiChatbot` (or your preferred path).
 4. Create a virtualenv (`python3 -m venv venv && source venv/bin/activate`).
 5. Install requirements and configure `.env`.
 6. Run `bash start` inside a process manager (tmux, screen, or systemd).
