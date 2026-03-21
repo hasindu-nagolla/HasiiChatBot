@@ -2,6 +2,8 @@
 
 HasiiBot is an intelligent, dynamic conversational Telegram bot.
 
+> **Note:** This project targets VPS deployments only.
+
 ## Deployment
 
 ### Deploy on VPS
