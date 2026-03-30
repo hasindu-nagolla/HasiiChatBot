@@ -1,6 +1,8 @@
 # HasiiBot
 
-![HasiiBot Banner](https://telegra.ph/file/2c6d1a6f78eba6199933a.jpg)
+<p align="center">
+   <img src="https://files.catbox.moe/bti5oz.png" alt="HasiiBot Banner" width="420" />
+</p>
 
 > AI-first Telegram assistant with MongoDB memory, Pyrogram power, and VPS-only deployment.
 
@@ -16,14 +18,13 @@
 - [Support](#support)
 
 ## Overview
-HasiiBot is an intelligent conversational Telegram bot that runs best on a self-managed VPS. It uses Pyrogram + MongoDB to remember chats, respects Telegram FloodWait limits, filters banned phrases, and provides a smooth experience in both groups and private chats.
+HasiiBot is an intelligent conversational Telegram bot that runs best on a self-managed VPS. It uses Pyrogram + MongoDB to remember chats, respects Telegram FloodWait limits, and provides a smooth experience in both groups and private chats.
 
 ## Features
 - AI-powered replies with GPT-backed fallback pipeline
 - Chatbot toggle per group with inline admin controls
 - MongoDB memory for contextual responses (text + stickers)
 - FloodWait-safe send helper to keep the bot online
-- Banned-word filter to block NSFW or restricted terms
 - Sticker-to-text learning so users can teach new reactions
 - `/chatbot` admin command plus `/start` and `/help` flows
 - Ready-to-run VPS scripts (`start`) for hands-free bootstrapping
