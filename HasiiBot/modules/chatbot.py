@@ -6,7 +6,7 @@ from pymongo import MongoClient
 from pyrogram import Client, filters
 from pyrogram.enums import ChatAction
 from pyrogram.types import InlineKeyboardMarkup, Message
-from pyrogram.errors import FloodWait
+from pyrogram.errors import FloodWait, PeerIdInvalid
 
 from config import MONGO_URL
 from HasiiBot import app
@@ -20,6 +20,9 @@ async def safe_send(callable_obj, *args, **kwargs):
             return await callable_obj(*args, **kwargs)
         except FloodWait as exc:
             await asyncio.sleep(exc.value + 1)
+        except PeerIdInvalid:
+            # Happens when the bot has not interacted with the peer yet; skip the send
+            return None
 
 
 @app.on_cmd("chatbot", group_only=True)
