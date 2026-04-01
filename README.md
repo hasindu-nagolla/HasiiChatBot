@@ -1,11 +1,7 @@
 # HasiiChatBot
 
 <p align="center">
-<<<<<<< HEAD
    <img src="https://files.catbox.moe/bti5oz.png" alt="HasiiBot Banner" width="420" />
-=======
-   <img src="https://files.catbox.moe/bti5oz.png" alt="HasiiChatBot Banner" width="420" />
->>>>>>> 3c9732354a6b85406d4e30be4ad29b9f2c26848f
 </p>
 
 > AI-first Telegram assistant with MongoDB memory, Pyrogram power, and VPS-only deployment.
