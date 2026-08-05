@@ -34,6 +34,6 @@ func main() {
 	handlers.RegisterChatbot(b, db)
 
 	// run
-	log.Println("Bot started successfully in Golang (Clean Architecture)!")
+	log.Println("Bot started successfully 🎉🎊🥳")
 	b.Start()
 }
