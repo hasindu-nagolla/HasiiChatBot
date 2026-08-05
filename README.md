@@ -1,9 +1,5 @@
 # HasiiChatBot
 
-<p align="center">
-   <img src="https://files.catbox.moe/bti5oz.png" alt="HasiiBot Banner" width="420" />
-</p>
-
 A fast and smart Telegram chatbot built with Golang and MongoDB. The bot automatically learns from user conversations and stickers in your group to generate natural replies.
 
 ## Features
