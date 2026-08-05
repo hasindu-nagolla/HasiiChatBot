@@ -37,6 +37,12 @@ go mod tidy
 go build -o bot ./cmd/bot/main.go
 ./bot
 ```
+## Legacy Version
+
+Looking for the previous Python (Pyrogram) version? 
+
+It is no longer actively maintained, but you can find the legacy source code here:
+[HasiiChatBot Legacy Version (Python)](https://github.com/hasindu-nagolla/HasiiChatBot/tree/0c98f265ac4ac7c3c5c5d7fdcf098aaad3fd160d)
 
 ## Support
 - Owner: [@Hasindu_Lakshan](https://t.me/Hasindu_Lakshan)
