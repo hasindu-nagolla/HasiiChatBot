@@ -122,6 +122,12 @@ func RegisterChatbot(b *tele.Bot, db *database.Database) {
 		// learn if reply
 		learn(c)
 
+		msg := c.Message()
+		if msg.IsReply() && msg.ReplyTo.Sender.ID != b.Me.ID {
+			// ignore replies to other people (only learn)
+			return nil
+		}
+
 		return handleQuery(c, text)
 	})
 
@@ -132,6 +138,12 @@ func RegisterChatbot(b *tele.Bot, db *database.Database) {
 
 		// learn if reply
 		learn(c)
+
+		msg := c.Message()
+		if msg.IsReply() && msg.ReplyTo.Sender.ID != b.Me.ID {
+			// ignore replies to other people (only learn)
+			return nil
+		}
 
 		// use sticker unique id
 		stickerID := c.Message().Sticker.UniqueID
