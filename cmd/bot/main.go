@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 	"time"
-	"github.com/hasindu-nagolla/HasiiChatBot/config"
-	"github.com/hasindu-nagolla/HasiiChatBot/database"
-	"github.com/hasindu-nagolla/HasiiChatBot/handlers"
+	"HasiiChatBot/config"
+	"HasiiChatBot/database"
+	"HasiiChatBot/handlers"
 	tele "gopkg.in/telebot.v3"
 )
 

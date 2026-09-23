@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hasindu-nagolla/HasiiChatBot/database"
+	"HasiiChatBot/database"
 	tele "gopkg.in/telebot.v3"
 )
 

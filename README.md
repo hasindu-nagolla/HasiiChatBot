@@ -10,7 +10,7 @@ A fast and smart Telegram chatbot built with Golang and MongoDB. The bot automat
 - Clean architecture and simple to deploy
 
 ## Requirements
-- Go 1.20+
+- Go 1.19+
 - MongoDB Database
 - Telegram Bot Token
 
@@ -29,10 +29,25 @@ MONGO_URL=your_mongodb_connection_string_here
 
 3. Build and Run
 ```bash
+tmux new -s HasiiChatBot
+
+python3 -m venv hasiichatbot
+source hasiichatbot/bin/activate
+
 go mod tidy
 go build -o bot ./cmd/bot/main.go
 ./bot
+
+# To detach from the session (leave it running):
+# Press Ctrl+B, then press D
+
+# To reattach to the session later:
+# tmux attach-session -t HasiiChatBot
+
+# To kill the session completely:
+# tmux kill-session -t HasiiChatBot
 ```
+
 ## Legacy Version
 
 Looking for the previous Python (Pyrogram) version? 

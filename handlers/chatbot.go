@@ -6,17 +6,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hasindu-nagolla/HasiiChatBot/database"
+	"HasiiChatBot/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	tele "gopkg.in/telebot.v3"
 )
 
 type ChatWord struct {
-	Word  string `bson:"word"`
-	Text  string `bson:"text"`
-	Check string `bson:"check"`
-	ID    string `bson:"id,omitempty"`
+	ChatID int64  `bson:"chat_id"`
+	Word   string `bson:"word"`
+	Text   string `bson:"text"`
+	Check  string `bson:"check"`
+	ID     string `bson:"id,omitempty"`
 }
 
 type Hasii struct {
@@ -33,7 +34,11 @@ func RegisterChatbot(b *tele.Bot, db *database.Database) {
 			return nil
 		}
 
-		cursor, err := db.WordDb.Find(context.Background(), bson.M{"word": queryWord})
+		// query only within this group's data
+		cursor, err := db.WordDb.Find(context.Background(), bson.M{
+			"chat_id": c.Chat().ID,
+			"word":    queryWord,
+		})
 		if err != nil {
 			return err
 		}
@@ -98,15 +103,22 @@ func RegisterChatbot(b *tele.Bot, db *database.Database) {
 			return
 		}
 
-		// avoid duplicates
+		chatID := c.Chat().ID
+
+		// avoid duplicates within this group
 		var existing ChatWord
-		err := db.WordDb.FindOne(context.Background(), bson.M{"word": word, "text": text}).Decode(&existing)
+		err := db.WordDb.FindOne(context.Background(), bson.M{
+			"chat_id": chatID,
+			"word":    word,
+			"text":    text,
+		}).Decode(&existing)
 		if err == mongo.ErrNoDocuments {
-			// save new reply
+			// save new reply scoped to this group
 			_, _ = db.WordDb.InsertOne(context.Background(), bson.M{
-				"word":  word,
-				"text":  text,
-				"check": check,
+				"chat_id": chatID,
+				"word":    word,
+				"text":    text,
+				"check":   check,
 			})
 		}
 	}
